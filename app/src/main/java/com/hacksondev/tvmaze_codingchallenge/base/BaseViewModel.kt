@@ -9,10 +9,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 open class BaseViewModel<T>(
-    private val repository: BaseRepository<T>
+        private val repository: BaseRepository<T>
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow<Resource<T>>(Resource.loading())
+
     val stateFlow: StateFlow<Resource<T>>
         get() = _stateFlow
 

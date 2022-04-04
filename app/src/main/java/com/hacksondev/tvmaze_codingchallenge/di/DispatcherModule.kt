@@ -9,4 +9,3 @@ val dispatcherModule = module {
     single(named("io")) { Dispatchers.IO }
 }
 
-

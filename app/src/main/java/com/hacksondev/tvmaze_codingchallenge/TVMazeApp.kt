@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.hacksondev.tvmaze_codingchallenge
 
 import android.app.Application

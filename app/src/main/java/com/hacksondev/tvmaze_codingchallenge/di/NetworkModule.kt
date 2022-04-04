@@ -1,7 +1,7 @@
 package com.hacksondev.tvmaze_codingchallenge.di
 
 import com.hacksondev.tvmaze_codingchallenge.BuildConfig
-import com.hacksondev.tvmaze_codingchallenge.services.TVMazeService
+import com.hacksondev.tvmaze_codingchallenge.network.TVMazeService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module

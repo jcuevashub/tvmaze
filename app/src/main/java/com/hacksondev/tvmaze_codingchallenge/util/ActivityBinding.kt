@@ -1,4 +1,4 @@
-package com.android.sample.tvmaze.util
+package com.hacksondev.tvmaze_codingchallenge.util
 
 import android.view.View
 import android.view.Window
@@ -11,7 +11,6 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialContainerTransformSharedElementCallback
 
 fun AppCompatActivity.simpleToolbarWithHome(toolbar: MaterialToolbar, title_: String = "") {
-    setSupportActionBar(toolbar)
     supportActionBar?.run {
         setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         setDisplayHomeAsUpEnabled(true)

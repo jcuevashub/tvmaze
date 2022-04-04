@@ -2,6 +2,7 @@ package com.hacksondev.tvmaze_codingchallenge.base
 
 import android.content.Context
 import com.hacksondev.tvmaze_codingchallenge.R
+
 import com.hacksondev.tvmaze_codingchallenge.util.Resource
 import com.hacksondev.tvmaze_codingchallenge.util.isNetworkAvailable
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,12 +26,10 @@ abstract class BaseRepository<T>(
     val result: Flow<Resource<T>> = flow {
         emit(Resource.loading())
         query().let {
-
             if (isNotEmpty(it)) {
                 // ****** STEP 1: VIEW CACHE ******
                 emit(Resource.success(it))
             }
-
             if (context.isNetworkAvailable()) {
                 try {
                     // ****** STEP 2: MAKE NETWORK CALL, SAVE RESULT TO CACHE ******
@@ -43,7 +42,6 @@ abstract class BaseRepository<T>(
                     }
                     emit(Resource.error(context.getString(R.string.failed_loading_msg),null))
                 }
-
             } else {
                 if (isNotEmpty(it)) {
                     return@flow

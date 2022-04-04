@@ -95,4 +95,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$versions.mockitoVersion"
     // mock extension function
     testImplementation "io.mockk:mockk:$versions.mockkVersion"
+
+//    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 }

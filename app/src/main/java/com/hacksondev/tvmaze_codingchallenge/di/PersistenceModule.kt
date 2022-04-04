@@ -10,10 +10,10 @@ val persistenceModule = module {
 
     single {
         Room.databaseBuilder(androidApplication(), ShowDatabase::class.java,
-            androidApplication().getString(R.string.database))
-            .allowMainThreadQueries()
-            .fallbackToDestructiveMigration()
-            .build()
+                androidApplication().getString(R.string.database))
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build()
     }
 
     single { get<ShowDatabase>().showDao }

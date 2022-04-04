@@ -1,10 +1,11 @@
+package com.hacksondev.tvmaze_codingchallenge.util
+
 import android.os.Build
 import android.text.Html
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import com.android.sample.tvmaze.util.simpleToolbarWithHome
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
 

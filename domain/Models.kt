@@ -1,8 +1,8 @@
-package com.hacksondev.tvmaze_codingchallenge.domain
+package com.android.sample.tvmaze.domain
 
 import android.os.Parcelable
-import com.hacksondev.tvmaze_codingchallenge.database.DatabaseImage
-import com.hacksondev.tvmaze_codingchallenge.database.DatabaseShow
+import com.android.sample.tvmaze.database.DatabaseImage
+import com.android.sample.tvmaze.database.DatabaseShow
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -17,7 +17,7 @@ data class Show(
 data class Image(
     val medium: String,
     val original: String
-    ): Parcelable
+) : Parcelable
 
 fun List<Show>.asDatabaseModel(): Array<DatabaseShow> {
     return map {
