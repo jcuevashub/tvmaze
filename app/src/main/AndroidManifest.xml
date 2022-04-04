@@ -15,11 +15,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".FavorityActivity"
-            android:exported="false"
-            android:label="@string/title_activity_favority"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

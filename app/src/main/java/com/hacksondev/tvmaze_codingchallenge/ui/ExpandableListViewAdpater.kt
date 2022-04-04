@@ -83,22 +83,13 @@ class ExpandableListViewAdapter internal constructor(private val context: Contex
         episodeTextView.text = episode.name
         episodeTextView.setOnClickListener{
 
-//            EpisodeDetailActivity.startActivity(context, convertView, episode)
             val intent = Intent(context, EpisodeDetailActivity::class.java)
                 .putExtra(EpisodeDetailActivity.EPISODE_KEY, episode)
 
-//            val intent = Intent(context, EpisodeDetailActivity::class.java)
-//                intent.putExtra("episodeId", episode.id)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(context,intent,null)
 
-            Toast.makeText(context,episodeTextView.text.toString(), Toast.LENGTH_SHORT).show()
         }
-
-//        episode.setOnClickListener {
-//            val intent = Intent(context, EpisodeDetailActivity::class.java)
-//            startActivity(intent)
-//        }
         return convertView
     }
 

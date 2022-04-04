@@ -31,16 +31,5 @@ class EpisodeDetailActivity : AppCompatActivity() {
 
     companion object {
         const val EPISODE_KEY = "showKey"
-
-        fun startActivity(context: Context, startView: View, episode: Episode) {
-            val intent = Intent(context, EpisodeDetailActivity::class.java)
-                .putExtra(EPISODE_KEY, episode)
-
-//                val options = ActivityOptions.makeSceneTransitionAnimation(
-//                    context,
-//                    startView, episode.name
-//                )
-            context.startActivity(intent,null)
-        }
     }
 }
