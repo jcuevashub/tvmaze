@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Schedule (
- val time : String?           = null,
- val days : ArrayList<String> = arrayListOf()
+ val time : String,
+ val days : List<String>
 ) : Parcelable

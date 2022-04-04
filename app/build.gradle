@@ -20,6 +20,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding true
     }
 
     buildTypes {
@@ -52,6 +53,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleVersion"
     implementation "androidx.room:room-runtime:$versions.roomVersion"
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     kapt "androidx.room:room-compiler:$versions.roomVersion"
 
     // Kotlin Extensions and Coroutines support for Room

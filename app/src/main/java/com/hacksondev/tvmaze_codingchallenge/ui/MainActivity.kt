@@ -3,67 +3,59 @@ package com.hacksondev.tvmaze_codingchallenge.ui
 import android.os.Bundle
 import android.view.Menu
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hacksondev.tvmaze_codingchallenge.R
-import com.hacksondev.tvmaze_codingchallenge.base.BaseActivity
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityMainBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
-import com.hacksondev.tvmaze_codingchallenge.util.Resource
-import com.hacksondev.tvmaze_codingchallenge.util.applyExitMaterialTransform
+import com.hacksondev.tvmaze_codingchallenge.network.TVMazeService.Companion.getInstance
+import com.hacksondev.tvmaze_codingchallenge.repository.ShowRepository
 import com.hacksondev.tvmaze_codingchallenge.util.hide
 import com.hacksondev.tvmaze_codingchallenge.util.show
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel
-import kotlinx.coroutines.flow.collect
+import com.hacksondev.tvmaze_codingchallenge.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
-import org.koin.android.viewmodel.ext.android.getViewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
-class MainActivity : BaseActivity<MainViewModel>(), SearchView.OnQueryTextListener {
-
-    override val binding: ActivityMainBinding by binding(R.layout.activity_main)
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var newArrayList: ArrayList<Show>
     private lateinit var viewModelAdapter: MainAdapter
     private lateinit var tempArrayList: ArrayList<Show>
+    private val api = getInstance()
 
-    override val viewModel: MainViewModel
-        get() = getViewModel()
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         tempArrayList = ArrayList<Show>()
         newArrayList = ArrayList<Show>()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        viewModel = ViewModelProvider(this, ViewModelFactory(ShowRepository(api))).get(MainViewModel::class.java)
 
-        applyExitMaterialTransform()
-        super.onCreate(savedInstanceState)
-        binding.apply {
-            vm = viewModel
-        }
-
+        setContentView(binding.root)
          viewModelAdapter = MainAdapter { startView, show ->
             DetailActivity.startActivity(this, startView, show)
+        }
+        binding.apply {
+            vm = viewModel
         }
         binding.recyclerView.adapter = viewModelAdapter
 
         lifecycleScope.launch {
-            viewModel.stateFlow.collect { resource ->
-                when (resource.status) {
-                    Resource.Status.SUCCESS -> {
-                        binding.loadingSpinner.hide()
-                        binding.errorLayout.hide()
-                        viewModelAdapter.submitList(resource.data)
-                        resource.data?.let { newArrayList.addAll(it) }
-                    }
-                    Resource.Status.LOADING -> {
-                        binding.loadingSpinner.show()
-                        binding.errorLayout.hide()
-                    }
-                    Resource.Status.ERROR -> {
-                        binding.loadingSpinner.hide()
-                        binding.errorLayout.show()
-                        binding.errorMsg.text = resource.message
-                    }
-                }
+            viewModel.showsList.observe(this@MainActivity) {
+                binding.loadingSpinner.hide()
+                binding.errorLayout.hide()
+                viewModelAdapter.submitList(it)
+                newArrayList.addAll(it)
             }
+            viewModel.errorMessage.observe(this@MainActivity){
+                binding.loadingSpinner.hide()
+                binding.errorLayout.show()
+            }
+            viewModel.getAllShows()
         }
     }
 

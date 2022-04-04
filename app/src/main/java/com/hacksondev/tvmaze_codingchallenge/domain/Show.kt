@@ -1,48 +1,69 @@
 package com.hacksondev.tvmaze_codingchallenge.domain
 
 import android.os.Parcelable
+import androidx.room.PrimaryKey
 import com.hacksondev.tvmaze_codingchallenge.database.DatabaseImage
 import com.hacksondev.tvmaze_codingchallenge.database.DatabaseShow
-
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Show (
-  var id             : Long?             = null,
-  var url            : String?           = null,
-  var name           : String?           = null,
-  var type           : String?           = null,
-  var language       : String?           = null,
-  var genres         : ArrayList<String> = arrayListOf(),
-  var status         : String?           = null,
-  var runtime        : Int?              = null,
-  var averageRuntime : Int?              = null,
-  var premiered      : String?           = null,
-  var ended          : String?           = null,
-  var officialSite   : String?           = null,
-  var schedule       : Schedule?         = Schedule(),
-  var rating         : Rating?           = Rating(),
-  var weight         : Int?              = null,
-  var network        : Network?          = Network(),
-  var webChannel     : String?           = null,
-  var dvdCountry     : String?           = null,
-  var externals      : Externals?        = Externals(),
-  var image          : Image?            = Image(),
-  var summary        : String?           = null,
-  var updated        : Int?              = null,
-  var Links          : Links?            = Links()
+data class Show(
+  @PrimaryKey
+  val id: Long,
+  val name: String,
+  val image: Image,
+  val summary: String,
+  val type: String,
+  val language: String,
+  val status         : String,
+  val runtime        : Int,
+  val premiered      : String,
+  val weight         : Int,
+  val genres         : List<String>,
+  val schedule       : Schedule
 ) : Parcelable
+
+@Parcelize
+data class Image(
+  val medium: String,
+  val original: String
+) : Parcelable
+
+@Parcelize
+data class Episode (
+  val id       : Int,
+  val url      : String,
+  val name     : String,
+  val season   : Int,
+  val number   : Int,
+  val type     : String,
+  val airdate  : String,
+  val airtime  : String,
+  val airstamp : String,
+
+  val image    : Image,
+  val summary  : String,
+) : Parcelable
+
 
 fun List<Show>.asDatabaseModel(): Array<DatabaseShow> {
   return map {
     DatabaseShow(
-      id = it.id!!,
-      name = it.name!!,
+      id = it.id,
+      name = it.name,
       image = DatabaseImage(
-        medium = it.image!!.medium!!,
-        original = it.image!!.original!!
+        medium = it.image.medium,
+        original = it.image.original
       ),
-      summary = it.summary!!
+      summary = it.summary,
+      type = it.type,
+      language = it.language,
+      status = it.status,
+      runtime = it.runtime,
+      premiered = it.premiered,
+      weight = it.weight,
+      genres = it.genres,
+      schedule = it.schedule
     )
   }.toTypedArray()
 }

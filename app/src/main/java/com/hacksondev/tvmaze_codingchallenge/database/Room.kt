@@ -6,6 +6,7 @@ import androidx.room.*
  * Data Access Object for the show table.
  */
 @Dao
+
 interface ShowDao {
 
     @Query("SELECT * FROM databaseshow")
@@ -16,6 +17,7 @@ interface ShowDao {
 }
 
 @Database(entities = [DatabaseShow::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class ShowDatabase : RoomDatabase() {
     abstract val showDao: ShowDao
 }
