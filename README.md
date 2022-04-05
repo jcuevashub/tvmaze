@@ -30,7 +30,7 @@ the following information:
 * Allow the user to set a PIN number to secure the application and prevent unauthorized users.
 * For supported phones, the user must be able to choose if they want to enable fingerprint authentication to avoid typing the PIN number while opening the app.
 * Allow the user to save a series as a favorite.
-* Allow the user to delete a series from the favorites list.
+* Allow the user to delete a series from the favorites list. (with Swipe)
 * Allow the user to browse their favorite series in alphabetical order, and click on one to
 see its details.
 * Create a people search by listing the name and image of the person.
