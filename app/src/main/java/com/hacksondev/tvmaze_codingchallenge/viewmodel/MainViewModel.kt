@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hacksondev.tvmaze_codingchallenge.database.DatabaseImage
 import com.hacksondev.tvmaze_codingchallenge.database.DatabaseShow
+import com.hacksondev.tvmaze_codingchallenge.domain.Cast
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
 import com.hacksondev.tvmaze_codingchallenge.domain.Image
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
@@ -16,6 +17,8 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: ShowRepository) : ViewModel() {
     val showsList = MutableLiveData<List<Show>>()
+    val castList = MutableLiveData<List<Cast>>()
+
     val episodes = MutableLiveData<List<Episode>>()
     val allShows = MutableLiveData<List<Show>>()
     val errorMessage = MutableLiveData<String>()
@@ -27,6 +30,18 @@ class MainViewModel(private val repository: ShowRepository) : ViewModel() {
                 showsList.postValue(response.body())
             }
             override fun onFailure(call: Call<List<Show>>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+
+    fun getShowCast(showId: String) {
+        val response = repository.fetchShowCast(showId)
+        response.enqueue(object : Callback<List<Cast>> {
+            override fun onResponse(call: Call<List<Cast>>, response: Response<List<Cast>>) {
+                castList.postValue(response.body())
+            }
+            override fun onFailure(call: Call<List<Cast>>, t: Throwable) {
                 errorMessage.postValue(t.message)
             }
         })

@@ -16,6 +16,7 @@ android {
         buildConfigField "String", "TV_MAZE_BASE_URL", "\"http://api.tvmaze.com/\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildFeatures {
@@ -44,7 +45,8 @@ dependencies {
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-
+    implementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation 'androidx.test:core:1.2.0'
     // android supports
     implementation "com.google.android.material:material:$versions.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintVersion"
@@ -54,7 +56,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleVersion"
     implementation "androidx.room:room-runtime:$versions.roomVersion"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
     kapt "androidx.room:room-compiler:$versions.roomVersion"
 
     // Kotlin Extensions and Coroutines support for Room
@@ -98,5 +99,11 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$versions.mockitoVersion"
     // mock extension function
     testImplementation "io.mockk:mockk:$versions.mockkVersion"
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "androidx.biometric:biometric:1.1.0"
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 }

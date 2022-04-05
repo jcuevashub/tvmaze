@@ -15,6 +15,11 @@ class ShowRepository(
 
       fun getAllEpisodeByShows(showId: String) = api.fetchShowEpisodesById(showId)
 
+      fun fetchShowCast(showId: String) = api.fetchShowCast(showId)
+
+      fun fetchCastInfo(id: String) = api.fetchCastInfo(id)
+
+
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(item: DatabaseShow) {

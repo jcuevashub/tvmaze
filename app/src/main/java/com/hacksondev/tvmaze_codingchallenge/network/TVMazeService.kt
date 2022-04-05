@@ -1,6 +1,8 @@
 package com.hacksondev.tvmaze_codingchallenge.network
 import com.hacksondev.tvmaze_codingchallenge.database.ShowDao
+import com.hacksondev.tvmaze_codingchallenge.domain.Cast
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
+import com.hacksondev.tvmaze_codingchallenge.domain.Person
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -16,6 +18,12 @@ interface TVMazeService {
     @GET("shows/{id}/episodes")
     fun fetchShowEpisodesById(@Path("id") id: String): Call<List<Episode>>
 
+    @GET("shows/{id}/cast")
+    fun fetchShowCast(@Path("id") id: String): Call<List<Cast>>
+
+    @GET("people/{id}")
+    fun fetchCastInfo(@Path("id") id: String): Call<Person>
+
     companion object {
         var retrofitService: TVMazeService? = null
 
@@ -28,11 +36,6 @@ interface TVMazeService {
                 retrofitService = retrofit.create(TVMazeService::class.java)
             }
             return retrofitService!!
-        }
-
-        fun getDaoInstance(): ShowDao {
-            val dao: ShowDao? = null
-            return  dao!!
         }
     }
 }

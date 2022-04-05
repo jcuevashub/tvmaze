@@ -1,13 +1,10 @@
 package com.hacksondev.tvmaze_codingchallenge.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ListView
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -15,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hacksondev.tvmaze_codingchallenge.R
 import com.hacksondev.tvmaze_codingchallenge.TVMazeApp
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityFavoriteBinding
-import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityMainBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.util.SwipeGesture
 import com.hacksondev.tvmaze_codingchallenge.util.hide
@@ -23,7 +19,6 @@ import com.hacksondev.tvmaze_codingchallenge.util.show
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
-import okhttp3.internal.notifyAll
 import java.util.*
 
 

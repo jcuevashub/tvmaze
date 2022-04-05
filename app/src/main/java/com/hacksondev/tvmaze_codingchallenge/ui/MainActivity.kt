@@ -9,13 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.hacksondev.tvmaze_codingchallenge.R
 import com.hacksondev.tvmaze_codingchallenge.TVMazeApp
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityMainBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
-import com.hacksondev.tvmaze_codingchallenge.util.SwipeGesture
 import com.hacksondev.tvmaze_codingchallenge.util.hide
 import com.hacksondev.tvmaze_codingchallenge.util.show
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel

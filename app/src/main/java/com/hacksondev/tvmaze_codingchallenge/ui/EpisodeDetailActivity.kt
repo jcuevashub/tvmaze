@@ -1,12 +1,7 @@
 package com.hacksondev.tvmaze_codingchallenge.ui
 
-import android.app.Activity
-import android.app.ActivityOptions
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityEpisodeDetailBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
 
