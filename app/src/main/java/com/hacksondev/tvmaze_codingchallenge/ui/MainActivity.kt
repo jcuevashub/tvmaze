@@ -110,4 +110,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return true
     }
 
+    override fun onBackPressed() {
+
+    }
 }

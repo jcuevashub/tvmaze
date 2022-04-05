@@ -2,6 +2,7 @@ package com.hacksondev.tvmaze_codingchallenge.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import com.hacksondev.tvmaze_codingchallenge.R
 import com.hacksondev.tvmaze_codingchallenge.TVMazeApp
@@ -25,15 +26,21 @@ class PeopleDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, ViewModelFactory((application as TVMazeApp).repository)).get(MainViewModel::class.java)
 
-
         val cast = intent.extras?.getParcelable<Cast>("cast")
+        cast.let {
+            binding.apply {
+                people = cast!!.person
+                activity = this@PeopleDetailActivity
+            }
 
-        binding.apply {
-            people = cast!!.person
-            activity = this@PeopleDetailActivity
+            binding.personName.text = "Name: " +cast!!.person.name
+            binding.country.text = "Country: " + cast!!.person.country.name
+            binding.gender.text = "Country: " + cast!!.person.gender
         }
+    }
 
-
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 }

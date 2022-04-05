@@ -83,9 +83,7 @@ class FavoriteActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
+        onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 

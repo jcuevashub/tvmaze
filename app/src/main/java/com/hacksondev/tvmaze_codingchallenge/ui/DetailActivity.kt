@@ -20,15 +20,12 @@ import com.hacksondev.tvmaze_codingchallenge.domain.Episode
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.show_item.view.*
 import kotlinx.coroutines.launch
 
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var listCastAdapter: CastAdapter
-
     private lateinit var listViewAdapter: ExpandableListViewAdapter
     private lateinit var seasonList: List<String>
     private lateinit var episodeList: HashMap<String, List<Episode>>
@@ -83,15 +80,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun fetchCast(showItem: Show) {
-        lifecycleScope.launch {
-            viewModel.castList.observe(this@DetailActivity) {
-                it
-                binding.castListView.adapter = CastAdapter(this@DetailActivity, it)
-            }
-            viewModel.errorMessage.observe(this@DetailActivity) {
-            }
-            viewModel.getShowCast(showItem.id.toString())
+
+        viewModel.castList.observe(this@DetailActivity) {
+            it
+            binding.castListView.adapter = CastAdapter(this@DetailActivity, it)
         }
+        viewModel.errorMessage.observe(this@DetailActivity) {
+        }
+        viewModel.getShowCast(showItem.id.toString())
 
         binding.castListView.setOnItemClickListener { parent, _, position, _ ->
             var cast = parent.getItemAtPosition(position)
@@ -107,34 +103,29 @@ class DetailActivity : AppCompatActivity() {
     private fun fetchSeasons(showItem: Show) =
         lifecycleScope.launch {
             viewModel.episodes.observe(this@DetailActivity) {
-                it
-
-                for (index in 1..getCount(it)) {
-                    (seasonList as ArrayList<String>).add("Season $index")
-                }
-
-                for (index in seasonList.indices) {
-                    episodeList[seasonList[index]] = it.filter { s -> s.season == index + 1 }
-                }
-
-                listViewAdapter = ExpandableListViewAdapter(baseContext, seasonList, episodeList)
-                binding.simpleListView.setAdapter(listViewAdapter)
-            }
-            viewModel.errorMessage.observe(this@DetailActivity) {
+                bindListOfEpisode(it)
             }
             viewModel.getAllEpisodeByShows(showItem.id.toString())
         }
 
-    // returns the number of groups
-    fun getCount(list: List<Episode>): Int {
+    private fun bindListOfEpisode(it: List<Episode>) {
+        for (index in 1..getCount(it)) {
+            (seasonList as ArrayList<String>).add("Season $index")
+        }
+        for (index in seasonList.indices) {
+            episodeList[seasonList[index]] = it.filter { s -> s.season == index + 1 }
+        }
+        listViewAdapter = ExpandableListViewAdapter(baseContext, seasonList, episodeList)
+        binding.simpleListView.setAdapter(listViewAdapter)
+    }
+
+    private fun getCount(list: List<Episode>): Int {
         val grouping = list.groupingBy { it.season }.eachCount()
         return grouping.keys.size
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
+        onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 

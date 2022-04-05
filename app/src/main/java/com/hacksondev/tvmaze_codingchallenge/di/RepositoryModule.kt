@@ -1,8 +1,5 @@
 package com.hacksondev.tvmaze_codingchallenge.di
 
-import com.hacksondev.tvmaze_codingchallenge.base.BaseListRepository
-import com.hacksondev.tvmaze_codingchallenge.domain.Show
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val repositoryModule = module {

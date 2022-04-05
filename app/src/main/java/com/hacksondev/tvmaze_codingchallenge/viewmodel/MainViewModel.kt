@@ -7,7 +7,6 @@ import com.hacksondev.tvmaze_codingchallenge.database.DatabaseImage
 import com.hacksondev.tvmaze_codingchallenge.database.DatabaseShow
 import com.hacksondev.tvmaze_codingchallenge.domain.Cast
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
-import com.hacksondev.tvmaze_codingchallenge.domain.Image
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.repository.ShowRepository
 import kotlinx.coroutines.launch

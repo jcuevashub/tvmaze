@@ -1,8 +1,6 @@
 package com.hacksondev.tvmaze_codingchallenge.util
 
-import android.R
 import android.content.Context
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 

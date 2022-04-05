@@ -1,6 +1,7 @@
 package com.hacksondev.tvmaze_codingchallenge.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityEpisodeDetailBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
@@ -22,6 +23,11 @@ class EpisodeDetailActivity : AppCompatActivity() {
         }
         binding.season.text = "Season: " + episodeItem!!.season.toString()
         binding.number.text = "Episode: " + episodeItem!!.number.toString()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

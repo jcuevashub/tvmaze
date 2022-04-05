@@ -58,7 +58,7 @@
                     <TextView
                         android:layout_margin="10dp"
                         android:padding="5dp"
-                        android:id="@+id/genderList"
+                        android:id="@+id/personName"
                         android:background="@color/black"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -68,34 +68,34 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="italic"
-                        app:layout_constraintBottom_toTopOf="@+id/time"
+                        app:layout_constraintBottom_toTopOf="@+id/gender"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:layout_margin="10dp"
                         android:padding="5dp"
-                        android:id="@+id/time"
+                        android:id="@+id/gender"
                         android:background="@color/black"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="@string/time"
+                        android:text="Gender"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="italic"
-                        app:layout_constraintBottom_toTopOf="@+id/days"
+                        app:layout_constraintBottom_toTopOf="@+id/country"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:layout_margin="10dp"
                         android:padding="5dp"
-                        android:id="@+id/days"
+                        android:id="@+id/country"
                         android:background="@color/black"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="@string/days"
+                        android:text="Country"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -136,52 +136,17 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/detail_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="8dp"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"
-                    app:showHTMLText="@{people.name}"
-                    tools:text="summary" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Episodes"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="italic"
-                    />
-
-                <ExpandableListView
-                    android:paddingStart="16dp"
-                    android:paddingEnd="8dp"
-                    android:layoutDirection="rtl"
-                    android:id="@+id/simpleListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:divider="@color/material_blue_grey_800"
-                    android:dividerHeight="1dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Casts"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="italic"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Casts"-->
+<!--                    android:paddingStart="16dp"-->
+<!--                    android:paddingEnd="8dp"-->
+<!--                    android:paddingBottom="8dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="italic"-->
+<!--                    />-->
 
                 <ListView
                     android:id="@+id/showListView"

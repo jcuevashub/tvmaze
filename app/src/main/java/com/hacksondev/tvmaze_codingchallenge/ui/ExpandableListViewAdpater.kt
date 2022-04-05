@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.hacksondev.tvmaze_codingchallenge.R
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
@@ -82,15 +81,17 @@ class ExpandableListViewAdapter internal constructor(private val context: Contex
         val episodeTextView = convertView!!.findViewById<TextView>(R.id.episode)
         episodeTextView.text = episode.name
         episodeTextView.setOnClickListener{
-
-            val intent = Intent(context, EpisodeDetailActivity::class.java)
-                .putExtra(EpisodeDetailActivity.EPISODE_KEY, episode)
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(context,intent,null)
-
+            navigateActivity(episode)
         }
         return convertView
+    }
+
+    private fun navigateActivity(episode: Episode) {
+        val intent = Intent(context, EpisodeDetailActivity::class.java)
+            .putExtra(EpisodeDetailActivity.EPISODE_KEY, episode)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(context, intent, null)
     }
 
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
