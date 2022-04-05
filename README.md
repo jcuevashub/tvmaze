@@ -2,7 +2,7 @@
 
 Design pattern: Model-View-ViewModel (MVVM)
 
-Using Room to persist the favorite shows
+Using Room to persist the favorites shows
 
 Libraries
 
@@ -15,6 +15,7 @@ Libraries
 * 		Material Design Build beautiful, usable products using Material Components for Android.
 *   Biometric
 *   Circleimageview
+*   Room
 
 Features:
 
