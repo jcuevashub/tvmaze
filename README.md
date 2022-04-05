@@ -13,7 +13,8 @@ Libraries
 * 		Material Design Build beautiful, usable products using Material Components for Android.
 * 		Biometric
 * 		Circleimageview
-*   Room: the Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+* 		Room: the Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+
 
 Features:
 
