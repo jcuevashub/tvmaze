@@ -42,3 +42,18 @@ see its details.
 as:
   * Name
   * Image
+
+How to install APKs
+
+Install Apps from Unknown Sources in Android 8.0 Oreo and 9.0 Pie
+https://www.maketecheasier.com/assets/uploads/2019/02/install-unknown-sources-android-8-9-blocked.png.webp
+
+As of Android 8.0, the method to install apps from unknown sources has changed. Instead of the previous method where you gave permission to download APKs through any existing app on your phone, from now on you need to give permission to specific apps that are allowed to install APKs from unknown sources.
+
+To set these permissions, go to “Settings -> Apps & notifications -> Advanced -> Special app access -> Install unknown apps”.
+
+https://www.maketecheasier.com/assets/uploads/2019/02/install-unknown-sources-android-8-9-install-unknown-app.png.webp
+
+Here, select the app (usually your internet browser) that you want to grant permission to install from unknown sources. Then once you’ve tapped it, tap “Allow from this source” to enable unknown sources for that specific app.
+
+https://www.maketecheasier.com/assets/uploads/2019/02/install-unknown-sources-android-8-9-allow-source.png.webp
