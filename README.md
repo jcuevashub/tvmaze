@@ -1,5 +1,9 @@
 # tvmaze
 
+Design pattern: Model-View-ViewModel (MVVM)
+
+Using Room to persist the favorite shows
+
 Libraries
 
 * 		Android Jetpack
@@ -9,8 +13,8 @@ Libraries
 * 		Retrofit is a Type-safe HTTP client for Android, Java and Kotlin by Square.
 * 		Gson is a serialization/deserialization library to convert objects into JSON and back.
 * 		Material Design Build beautiful, usable products using Material Components for Android.
-*     biometric
-*     circleimageview
+*   Biometric
+*   Circleimageview
 
 Features:
 
