@@ -1,5 +1,13 @@
 # tvmaze
 
+The App was Tested on a physical device:
+
+ Device Name: OnePlus 7 Pro
+ Model: GM1915
+ Build number: Oxygen OS 11.0.7.GM31CB
+ Android Version: 11
+
+
 Design pattern: Model-View-ViewModel (MVVM)
 
 Libraries
