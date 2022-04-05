@@ -3,7 +3,7 @@ ext.versions = [
         compileSdk       : 29,
         versionCode      : 1,
         versionName      : '1.0.0',
-
+        activityVersion : '1.2.1',
         // gradle plugins
         gradleBuildTool  : '7.1.0',
 

@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -25,6 +28,9 @@
         </activity>
         <activity android:name=".ui.DetailActivity" />
         <activity android:name=".ui.EpisodeDetailActivity" />
+        <activity
+            android:name=".ui.FavoriteActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

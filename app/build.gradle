@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.activity:activity-ktx:$versions.activityVersion"
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
@@ -53,6 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleVersion"
     implementation "androidx.room:room-runtime:$versions.roomVersion"
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     kapt "androidx.room:room-compiler:$versions.roomVersion"
 
     // Kotlin Extensions and Coroutines support for Room
@@ -96,6 +98,5 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$versions.mockitoVersion"
     // mock extension function
     testImplementation "io.mockk:mockk:$versions.mockkVersion"
-
-//    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }

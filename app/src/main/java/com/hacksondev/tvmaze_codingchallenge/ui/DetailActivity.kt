@@ -12,11 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hacksondev.tvmaze_codingchallenge.R
+import com.hacksondev.tvmaze_codingchallenge.TVMazeApp
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityDetailBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
-import com.hacksondev.tvmaze_codingchallenge.network.TVMazeService
-import com.hacksondev.tvmaze_codingchallenge.repository.ShowRepository
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
@@ -30,9 +29,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var seasonList: List<String>
     private lateinit var episodeList: HashMap<String, List<Episode>>
     private lateinit var expandableListView: ExpandableListView
-
-    private val api = TVMazeService.getInstance()
-
     lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this, ViewModelFactory(ShowRepository(api))).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory((application as TVMazeApp).repository)).get(MainViewModel::class.java)
         setContentView(binding.root)
         expandableListView = findViewById(R.id.simpleListView)
 
@@ -51,7 +47,6 @@ class DetailActivity : AppCompatActivity() {
             show = showItem
             activity = this@DetailActivity
         }
-
 
 
         showItem?.let { it ->
@@ -89,8 +84,6 @@ class DetailActivity : AppCompatActivity() {
                     binding.simpleListView.setAdapter(listViewAdapter)
                 }
                 viewModel.errorMessage.observe(this@DetailActivity){
-//                    binding.loadingSpinner.hide()
-//                    binding.errorLayout.show()
                 }
                 viewModel.getAllEpisodeByShows(showItem.id.toString())
             }
@@ -103,12 +96,6 @@ class DetailActivity : AppCompatActivity() {
     fun getCount(list: List<Episode>): Int {
         val grouping = list.groupingBy { it.season }.eachCount()
         return grouping.keys.size
-    }
-
-    //returns the size of a given group (0 if group not found)
-    fun getCountOf(list: List<Episode>, season: Int): Int {
-        val grouping = list.groupingBy { it.season }.eachCount()
-        return grouping[season] ?: 0
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

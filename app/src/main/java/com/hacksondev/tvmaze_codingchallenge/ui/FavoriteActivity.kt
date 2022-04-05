@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ListView
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.hacksondev.tvmaze_codingchallenge.R
 import com.hacksondev.tvmaze_codingchallenge.TVMazeApp
+import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityFavoriteBinding
 import com.hacksondev.tvmaze_codingchallenge.databinding.ActivityMainBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.util.SwipeGesture
@@ -21,73 +23,87 @@ import com.hacksondev.tvmaze_codingchallenge.util.show
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.MainViewModel
 import com.hacksondev.tvmaze_codingchallenge.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
+import okhttp3.internal.notifyAll
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var newArrayList: ArrayList<Show>
-    private lateinit var viewModelAdapter: MainAdapter
-    private lateinit var tempArrayList: ArrayList<Show>
+class FavoriteActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
+    private lateinit var binding: ActivityFavoriteBinding
     lateinit var viewModel: MainViewModel
+    private lateinit var viewModelAdapter: FavoriteAdapter
+    private lateinit var tempArrayList: ArrayList<Show>
+    private lateinit var newArrayList: ArrayList<Show>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tempArrayList = ArrayList<Show>()
         newArrayList = ArrayList<Show>()
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this, ViewModelFactory((application as TVMazeApp).repository)).get(MainViewModel::class.java)
 
-        setContentView(binding.root)
-         viewModelAdapter = MainAdapter { startView, show ->
+        viewModel = ViewModelProvider(this, ViewModelFactory((application as TVMazeApp).repository)).get(MainViewModel::class.java)
+        val showItem = intent.extras?.getParcelable<Show>("favorite")
+
+        viewModelAdapter = FavoriteAdapter { startView, show ->
             DetailActivity.startActivity(this, startView, show)
         }
 
-        binding.apply {
-            vm = viewModel
+        binding.favoriteRecyclerView.adapter = viewModelAdapter
+        showItem.let {
+            if (it != null) {
+                viewModel.addFavorite(showItem!!)
+            }
+            viewModel.getFavorites()
         }
-        binding.recyclerView.adapter = viewModelAdapter
+
 
         lifecycleScope.launch {
-            viewModel.showsList.observe(this@MainActivity) {
+            viewModel.allShows.observe(this@FavoriteActivity) {
+                newArrayList.addAll(it)
+                viewModelAdapter.submitList(newArrayList)
                 binding.loadingSpinner.hide()
                 binding.errorLayout.hide()
-                viewModelAdapter.submitList(it)
-                newArrayList.addAll(it)
             }
-            viewModel.errorMessage.observe(this@MainActivity){
+            viewModel.errorMessage.observe(this@FavoriteActivity){
                 binding.loadingSpinner.hide()
                 binding.errorLayout.show()
             }
-            viewModel.getAllShows()
         }
 
+        val swipeToDelete = object : SwipeGesture(this@FavoriteActivity) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val show = newArrayList[position]
+                newArrayList.removeAt(position)
+                viewModel.removeFavorites(show)
+                binding.favoriteRecyclerView.adapter?.notifyItemRemoved(position)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDelete)
+        itemTouchHelper.attachToRecyclerView(binding.favoriteRecyclerView)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @Override
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.favorite_menu, menu)
 
         val search = menu?.findItem(R.id.search)
         val searchView = search?.actionView as? SearchView
         searchView?.setOnQueryTextListener(this)
 
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            R.id.favorite -> {
-                val intent = Intent(this, FavoriteActivity::class.java)
-                ContextCompat.startActivity(this, intent, null)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -103,11 +119,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     tempArrayList.add(it)
                 }
             }
-            binding.recyclerView.adapter!!.notifyDataSetChanged()
+            binding.favoriteRecyclerView.adapter!!.notifyDataSetChanged()
         } else {
             tempArrayList.clear()
             tempArrayList.addAll(newArrayList)
-            binding.recyclerView.adapter!!.notifyDataSetChanged()
+            binding.favoriteRecyclerView.adapter!!.notifyDataSetChanged()
         }
         viewModelAdapter.submitList(tempArrayList)
         return true

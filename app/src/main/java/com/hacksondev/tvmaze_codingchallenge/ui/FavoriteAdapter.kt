@@ -1,5 +1,6 @@
 package com.hacksondev.tvmaze_codingchallenge.ui
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hacksondev.tvmaze_codingchallenge.databinding.ShowItemBinding
+import com.hacksondev.tvmaze_codingchallenge.databinding.FavoriteListItemBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.util.layoutInflater
 import kotlinx.android.synthetic.main.show_item.view.*
 
-class MainAdapter(
+class FavoriteAdapter(
     private val startDetailActivity: (View, Show) -> Unit
-) : ListAdapter<Show, MainAdapter.MainViewHolder>(DiffCallback) {
+) : ListAdapter<Show, FavoriteAdapter.MainViewHolder>(DiffCallback) {
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
      * an item.
@@ -35,22 +36,14 @@ class MainAdapter(
     /**
      * ViewHolder for category items. All work is done by data binding.
      */
-    class MainViewHolder(private val binding: ShowItemBinding) :
+    class MainViewHolder(private val binding: FavoriteListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show, startDetailActivity: (View, Show) -> Unit) {
             with(binding) {
                 this.show = show
                 root.setOnClickListener {
-
                     startDetailActivity(itemContainer, show)
-                }
-                root.btnFavorite.setOnClickListener {
-                    val intent = Intent(it.context, FavoriteActivity::class.java)
-                        .putExtra("favorite", show)
-
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    ContextCompat.startActivity(it.context, intent, null)
                 }
                 executePendingBindings()
             }
@@ -58,7 +51,7 @@ class MainAdapter(
 
         companion object {
             fun from(parent: ViewGroup): MainViewHolder {
-                val binding = ShowItemBinding.inflate(
+                val binding = FavoriteListItemBinding.inflate(
                     parent.context.layoutInflater,
                     parent,
                     false
@@ -67,6 +60,7 @@ class MainAdapter(
             }
         }
     }
+
 
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of [Show]

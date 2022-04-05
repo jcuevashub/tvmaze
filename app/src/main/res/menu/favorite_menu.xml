@@ -6,10 +6,4 @@
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|withText" />
-
-    <item
-        android:id="@+id/favorite"
-        android:icon="@android:drawable/btn_star_big_on"
-        android:title="Fovorite"
-        app:showAsAction="ifRoom|withText" />
 </menu>

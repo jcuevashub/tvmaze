@@ -5,7 +5,10 @@ package com.hacksondev.tvmaze_codingchallenge
 import android.app.Application
 import android.os.Build
 import androidx.work.*
+import com.hacksondev.tvmaze_codingchallenge.database.ShowDatabase
 import com.hacksondev.tvmaze_codingchallenge.di.*
+import com.hacksondev.tvmaze_codingchallenge.network.TVMazeService
+import com.hacksondev.tvmaze_codingchallenge.repository.ShowRepository
 import com.hacksondev.tvmaze_codingchallenge.work.RefreshShowWork
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +22,9 @@ import java.util.concurrent.TimeUnit
 class TVMazeApp : Application() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
+    val database by lazy { ShowDatabase.getDatabase(this) }
+    val  api = TVMazeService.getInstance()
+    val repository by lazy { ShowRepository(api,database.showDao) }
 
     override fun onCreate() {
         super.onCreate()

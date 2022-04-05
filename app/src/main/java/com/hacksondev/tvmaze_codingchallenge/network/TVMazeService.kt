@@ -1,4 +1,5 @@
 package com.hacksondev.tvmaze_codingchallenge.network
+import com.hacksondev.tvmaze_codingchallenge.database.ShowDao
 import com.hacksondev.tvmaze_codingchallenge.domain.Episode
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import retrofit2.Call
@@ -27,6 +28,11 @@ interface TVMazeService {
                 retrofitService = retrofit.create(TVMazeService::class.java)
             }
             return retrofitService!!
+        }
+
+        fun getDaoInstance(): ShowDao {
+            val dao: ShowDao? = null
+            return  dao!!
         }
     }
 }
