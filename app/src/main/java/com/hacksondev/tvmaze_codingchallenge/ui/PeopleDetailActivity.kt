@@ -35,7 +35,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
             binding.personName.text = "Name: " +cast!!.person.name
             binding.country.text = "Country: " + cast!!.person.country.name
-            binding.gender.text = "Country: " + cast!!.person.gender
+            binding.gender.text = "Gender: " + cast!!.person.gender
         }
     }
 

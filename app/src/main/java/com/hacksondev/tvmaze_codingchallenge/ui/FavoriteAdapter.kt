@@ -1,18 +1,13 @@
 package com.hacksondev.tvmaze_codingchallenge.ui
 
-import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hacksondev.tvmaze_codingchallenge.databinding.FavoriteListItemBinding
 import com.hacksondev.tvmaze_codingchallenge.domain.Show
 import com.hacksondev.tvmaze_codingchallenge.util.layoutInflater
-import kotlinx.android.synthetic.main.show_item.view.*
 
 class FavoriteAdapter(
     private val startDetailActivity: (View, Show) -> Unit

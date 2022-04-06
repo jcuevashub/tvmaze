@@ -1,10 +1,10 @@
 package com.hacksondev.tvmaze_codingchallenge
 
 import android.app.Application
+import androidx.databinding.ktx.BuildConfig
 import com.hacksondev.tvmaze_codingchallenge.database.ShowDatabase
 import com.hacksondev.tvmaze_codingchallenge.network.TVMazeService
 import com.hacksondev.tvmaze_codingchallenge.repository.ShowRepository
-import org.koin.android.BuildConfig
 import timber.log.Timber
 
 class TVMazeApp : Application() {

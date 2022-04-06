@@ -61,11 +61,6 @@ dependencies {
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$versions.roomVersion"
 
-    // koin
-    implementation "org.koin:koin-android:$versions.koinVersion"
-    implementation "org.koin:koin-android-scope:$versions.koinVersion"
-    implementation "org.koin:koin-android-viewmodel:$versions.koinVersion"
-
     // network
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
@@ -82,12 +77,6 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 
-    // WorkManager
-    implementation "androidx.work:work-runtime-ktx:$versions.workVersion"
-
-    // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakcanaryVersion"
-
     //Junit
     testImplementation "junit:junit:$versions.junitVersion"
 
@@ -95,10 +84,6 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$versions.androidxTest"
     testImplementation "androidx.room:room-testing:$versions.roomVersion"
 
-    // Dependencies for local unit tests
-    testImplementation "org.mockito:mockito-core:$versions.mockitoVersion"
-    // mock extension function
-    testImplementation "io.mockk:mockk:$versions.mockkVersion"
     implementation "androidx.biometric:biometric:1.1.0"
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
